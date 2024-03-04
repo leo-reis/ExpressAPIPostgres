@@ -47,3 +47,22 @@ Install these types so that TypeScript can work with the modules above:
 npm add @types/express
 npm add @types/cors
 ```
+
+
+## Run the API
+Running the API is simple, install all modules from the package.json with:
+```bash
+npm install
+```
+
+and then you can run the API with:
+```bash
+npm run dev
+```
+
+
+
+## Running PostgreSQL Database
+To test the API with some real database data, we use PostgreSQL Server to run a database server and DBeaver to run the marketplace.sql file to create the database and its tables, you can install each one with the links below:
+
+https://www.postgresql.org/download/windows/
