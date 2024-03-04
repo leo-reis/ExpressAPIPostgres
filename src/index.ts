@@ -11,7 +11,14 @@ app.use(express.json());
 try {
   app.get('/client', clientController.getAllClients);
 } catch (error) {
-  console.error(`Error: ${error}`);
+  console.error(error);
+  process.exit(1);
+}
+
+try {
+  app.post('/client', clientController.createNewClient);
+} catch (error) {
+  console.error(error);
   process.exit(1);
 }
 

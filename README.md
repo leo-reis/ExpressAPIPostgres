@@ -66,3 +66,13 @@ npm run dev
 To test the API with some real database data, we use PostgreSQL Server to run a database server and DBeaver to run the marketplace.sql file to create the database and its tables, you can install each one with the links below:
 
 https://www.postgresql.org/download/windows/
+
+
+## Test of Post method
+Use this command to test the post method of the /client route:
+curl -X POST -H "Content-Type: application/json" -d '{
+  "client_id": 123,
+  "name": "First Client",
+  "email": "first@client.com",
+  "phone_number": "+123456789"
+}' http://localhost:4000/client
