@@ -1,17 +1,19 @@
 import { Request, Response } from 'express';
+import { client } from '../models/clientModel';
 
-const clientModel = require('../models/clientModel');
+const clientModel = new client;
 
-const clientController = {
-  getAllClients: async (req: Request, res: Response) => {
+export class clientController {
+  async getAllClients(req: Request, res: Response) {
     try {
       const clients = await clientModel.getAllClients();
       res.status(200).json(clients);
     } catch (error) {
       res.status(500).json({ error: 'Error retrieving the list of clients.' });
     }
-  },
-  createNewClient: async (req: Request, res: Response) => {
+  }
+
+  async createNewClient (req: Request, res: Response) {
     const { client_id, name, email, phone_number } = req.body;
     try {
       const newClient = await clientModel.createNewClient(client_id, name, email, phone_number);
@@ -21,5 +23,3 @@ const clientController = {
     }
   }
 };
-
-module.exports = clientController;
