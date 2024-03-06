@@ -17,7 +17,7 @@ export class productController {
     const {product_id, name, description, seller_id, price, locale_id } = req.body;
     try {
       const newproduct = await productModel.createNewProduct(product_id, name, description, seller_id, price, locale_id);
-      res.status(201).json(newproduct);
+      res.status(201).json({ message: 'Product created successfully', product: newproduct });
     } catch (error) {
       res.status(500).json({ error: 'Error creating new product.' });
     }

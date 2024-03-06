@@ -17,7 +17,7 @@ export class localeController {
     const { locale_id, name } = req.body;
     try {
       const newlocale = await localeModel.createNewLocale(locale_id, name);
-      res.status(201).json(newlocale);
+      res.status(201).json({ message: 'Locale created successfully', locale: newlocale });
     } catch (error) {
       res.status(500).json({ error: 'Error creating new locale.' });
     }

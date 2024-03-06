@@ -12,7 +12,7 @@ export class client {
   }
 
   async createNewClient (
-    client_id: string, 
+    client_id: number, 
     name: string, 
     email: string, 
     phone_number: string) {

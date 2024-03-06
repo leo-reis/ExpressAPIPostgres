@@ -12,7 +12,7 @@ export class seller {
   }
 
   async createNewSeller (
-    seller_id: string, 
+    seller_id: number, 
     name: string, 
     email: string, 
     phone_number: string) {

@@ -17,7 +17,7 @@ export class sellerController {
     const { seller_id, name, email, phone_number } = req.body;
     try {
       const newseller = await sellerModel.createNewSeller(seller_id, name, email, phone_number);
-      res.status(201).json(newseller);
+      res.status(201).json({ message: 'Seller created successfully', seller: newseller });
     } catch (error) {
       res.status(500).json({ error: 'Error creating new seller.' });
     }

@@ -28,7 +28,7 @@ To begin working with TypeScript, this command was used:
 npx tsc --init
 ```
 
-This module required for working with TypeScript:
+This module is required for working with TypeScript:
 ```bash
 npm install @types/node typescript
 npm install -D ts-node

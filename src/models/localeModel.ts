@@ -12,7 +12,7 @@ export class locale {
   }
 
   async createNewLocale (
-    locale_id: string, 
+    locale_id: number, 
     name: string) {
     try {
       const query = 'INSERT INTO locale (locale_id, name) VALUES ($1, $2) RETURNING *';

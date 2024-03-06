@@ -12,7 +12,7 @@ export class product {
   }
 
   async createNewProduct (
-    product_id: string, 
+    product_id: number, 
     name: string, 
     description: string, 
     seller_id: number,
