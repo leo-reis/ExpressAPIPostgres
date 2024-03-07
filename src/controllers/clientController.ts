@@ -1,25 +1,40 @@
-import { Request, Response } from 'express';
-import { client } from '../models/clientModel';
+import {
+  Body,
+  Controller,
+  Get,
+  Path,
+  Post,
+  Query,
+  Route,
+  SuccessResponse,
+} from "tsoa";
+import { ClientService, ClientCreationParams } from '../services/clientService';
+import { Client } from '../models/clientModel'
 
-const clientModel = new client;
-
-export class clientController {
-  async getAllClients(req: Request, res: Response) {
+@Route("client")
+export class clientController extends Controller {
+  @Get()
+  async getAllClients(): Promise<Client[]> {
     try {
-      const clients = await clientModel.getAllClients();
-      res.status(200).json(clients);
+      const clientsList = await new ClientService().getAllClients();
+      return clientsList;
     } catch (error) {
-      res.status(500).json({ error: 'Error retrieving the list of clients.' });
+      this.setStatus(500);
+      return [];
     }
   }
 
-  async createNewClient (req: Request, res: Response) {
-    const { client_id, name, email, phone_number } = req.body;
+  @SuccessResponse("201", "Created")
+  @Post()
+  async createNewClient(
+    @Body() requestBody: ClientCreationParams
+  ): Promise<void> {
     try {
-      const newClient = await clientModel.createNewClient(client_id, name, email, phone_number);
-      res.status(201).json({ message: 'Client created successfully', client: newClient });
+    const { client_id, name, email, phone_number } = requestBody;
+    const newClient = new ClientService().createNewClient(client_id, name, email, phone_number);
+    this.setStatus(201);
     } catch (error) {
-      res.status(500).json({ error: 'Error creating new client.' });
+      this.setStatus(500);
     }
   }
-};
+}

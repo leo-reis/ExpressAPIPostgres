@@ -1,5 +1,11 @@
 # ExpressAPIPostgres
 
+# Description
+Simple MarketPlace API using Express and PostgreSQL
+
+![SwaggerUIScreen](images/SwaggerUIScreen.png)
+
+
 ## Prerequisites:
 Install the below tools to work with this project:
 
@@ -28,7 +34,7 @@ To begin working with TypeScript, this command was used:
 npx tsc --init
 ```
 
-This module is required for working with TypeScript:
+These package and TypeScript execution engine are required for working with TypeScript:
 ```bash
 npm install @types/node typescript
 npm install -D ts-node
@@ -49,18 +55,27 @@ npm add @types/cors
 ```
 
 
-## Run the API
-Running the API is simple, install all modules from the package.json with:
+## Before running the API
+Install all dependencies from the package.json to start working with this project:
 ```bash
 npm install
 ```
 
-and then you can run the API with:
+## Generating OpenAPISpec and Running the API
+tsoa has to be installed globaly to generate routes and the OAS spec, so this command had to be run:
 ```bash
-npm run dev
+npm install -g tsoa
 ```
-
-
+To generate the tsoa routes and the openapi spec on the build directory, respectively, run:
+```bash
+tsoa routes
+tsoa spec
+```
+After that you can build the js files of the project with tsc and then run the generated JavaScript project:
+```bash
+npx tsc
+node dist/src/index.js
+```
 
 ## Running PostgreSQL Database
 To test the API with some real database data, we use PostgreSQL Server to run a database server and DBeaver to run the marketplace.sql file to create the database and its tables, you can install each one with the links below:
@@ -76,3 +91,5 @@ curl -X POST -H "Content-Type: application/json" -d '{
   "email": "first@client.com",
   "phone_number": "+123456789"
 }' http://localhost:4000/client
+
+Alternatively, you can now access the /docs route on your browser and test the post route with the Swagger UI

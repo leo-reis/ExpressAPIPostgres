@@ -1,18 +1,21 @@
-import express from 'express';
+import express, { Response as ExResponse, Request as ExRequest } from 'express';
 import cors from 'cors';
-import { router } from './routes/entities';
-import { loginrouter } from './routes/login';
+import swaggerUi from "swagger-ui-express";
+import { RegisterRoutes } from "../build/routes";
 
 const app = express();
 const port = process.env.PORT || 4000;
 
-app.get('/', (req, res) => {
-  res.redirect('/login');
-});
-app.use(express.json()); 
-app.use('/', loginrouter);
-app.use('/', router);
+app.use(express.json());
 app.use(cors());
+
+app.use("/docs", swaggerUi.serve, async (_req: ExRequest, res: ExResponse) => {
+  return res.send(
+    swaggerUi.generateHTML(await import("../build/swagger.json"))
+  );
+});
+
+RegisterRoutes(app);
 
 // Start the server
 app.listen(port, () => {
