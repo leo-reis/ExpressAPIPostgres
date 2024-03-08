@@ -1,25 +1,40 @@
-import { Request, Response } from 'express';
-import { product } from '../models/productModel';
+import {
+  Body,
+  Controller,
+  Get,
+  Path,
+  Post,
+  Query,
+  Route,
+  SuccessResponse,
+} from "tsoa";
+import { ProductService, ProductCreationParams } from '../services/productService';
+import { Product } from '../models/productModel'
 
-const productModel = new product;
-
-export class productController {
-  async getAllProducts(req: Request, res: Response) {
+@Route("product")
+export class productController extends Controller {
+  @Get()
+  async getAllProducts(): Promise<Product[]> {
     try {
-      const products = await productModel.getAllProducts();
-      res.status(200).json(products);
+      const productsList = await new ProductService().getAllProducts();
+      return productsList;
     } catch (error) {
-      res.status(500).json({ error: 'Error retrieving the list of products.' });
+      this.setStatus(500);
+      return [];
     }
   }
 
-  async createNewProduct (req: Request, res: Response) {
-    const {product_id, name, description, seller_id, price, locale_id } = req.body;
+  @SuccessResponse("201", "Created")
+  @Post()
+  async createNewProduct(
+    @Body() requestBody: ProductCreationParams
+  ): Promise<void> {
     try {
-      const newproduct = await productModel.createNewProduct(product_id, name, description, seller_id, price, locale_id);
-      res.status(201).json({ message: 'Product created successfully', product: newproduct });
+      const { product_id, name, description, seller_id, price, locale_id } =requestBody;
+      const newProduct = new ProductService().createNewProduct(product_id, name, description, seller_id, price, locale_id);
+      this.setStatus(201);
     } catch (error) {
-      res.status(500).json({ error: 'Error creating new product.' });
+      this.setStatus(500);
     }
   }
-};
+}

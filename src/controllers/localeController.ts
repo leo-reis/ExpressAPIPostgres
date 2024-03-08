@@ -1,25 +1,40 @@
-import { Request, Response } from 'express';
-import { locale } from '../models/localeModel';
+import {
+  Body,
+  Controller,
+  Get,
+  Path,
+  Post,
+  Query,
+  Route,
+  SuccessResponse,
+} from "tsoa";
+import { LocaleService, LocaleCreationParams } from '../services/localeService';
+import { Locale } from '../models/localeModel'
 
-const localeModel = new locale;
-
-export class localeController {
-  async getAllLocales(req: Request, res: Response) {
+@Route("locale")
+export class localeController extends Controller {
+  @Get()
+  async getAllLocales(): Promise<Locale[]> {
     try {
-      const locales = await localeModel.getAllLocales();
-      res.status(200).json(locales);
+      const localesList = await new LocaleService().getAllLocales();
+      return localesList;
     } catch (error) {
-      res.status(500).json({ error: 'Error retrieving the list of locales.' });
+      this.setStatus(500);
+      return [];
     }
   }
 
-  async createNewLocale (req: Request, res: Response) {
-    const { locale_id, name } = req.body;
+  @SuccessResponse("201", "Created")
+  @Post()
+  async createNewLocale(
+    @Body() requestBody: LocaleCreationParams
+  ): Promise<void> {
     try {
-      const newlocale = await localeModel.createNewLocale(locale_id, name);
-      res.status(201).json({ message: 'Locale created successfully', locale: newlocale });
+      const { locale_id, name } =requestBody;
+      const newLocale = new LocaleService().createNewLocale(locale_id, name);
+      this.setStatus(201);
     } catch (error) {
-      res.status(500).json({ error: 'Error creating new locale.' });
+      this.setStatus(500);
     }
   }
-};
+}

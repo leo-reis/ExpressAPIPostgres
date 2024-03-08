@@ -7,6 +7,171 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
+			"Seller": {
+				"properties": {
+					"seller_id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"phone_number": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"seller_id",
+					"name",
+					"email",
+					"phone_number"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Pick_Seller.seller_id-or-name-or-email-or-phone_number_": {
+				"properties": {
+					"seller_id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"phone_number": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"seller_id",
+					"name",
+					"email",
+					"phone_number"
+				],
+				"type": "object",
+				"description": "From T, pick a set of properties whose keys are in the union K"
+			},
+			"SellerCreationParams": {
+				"$ref": "#/components/schemas/Pick_Seller.seller_id-or-name-or-email-or-phone_number_"
+			},
+			"Product": {
+				"properties": {
+					"product_id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"description": {
+						"type": "string"
+					},
+					"seller_id": {
+						"type": "number",
+						"format": "double"
+					},
+					"price": {
+						"type": "number",
+						"format": "double"
+					},
+					"locale_id": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"product_id",
+					"name",
+					"description",
+					"seller_id",
+					"price",
+					"locale_id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Pick_Product.product_id-or-name-or-description-or-seller_id-or-price-or-locale_id_": {
+				"properties": {
+					"seller_id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					},
+					"product_id": {
+						"type": "number",
+						"format": "double"
+					},
+					"description": {
+						"type": "string"
+					},
+					"price": {
+						"type": "number",
+						"format": "double"
+					},
+					"locale_id": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"seller_id",
+					"name",
+					"product_id",
+					"description",
+					"price",
+					"locale_id"
+				],
+				"type": "object",
+				"description": "From T, pick a set of properties whose keys are in the union K"
+			},
+			"ProductCreationParams": {
+				"$ref": "#/components/schemas/Pick_Product.product_id-or-name-or-description-or-seller_id-or-price-or-locale_id_"
+			},
+			"Locale": {
+				"properties": {
+					"locale_id": {
+						"type": "number",
+						"format": "double"
+					},
+					"name": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"locale_id",
+					"name"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Pick_Locale.locale_id-or-name_": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"locale_id": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"name",
+					"locale_id"
+				],
+				"type": "object",
+				"description": "From T, pick a set of properties whose keys are in the union K"
+			},
+			"LocaleCreationParams": {
+				"$ref": "#/components/schemas/Pick_Locale.locale_id-or-name_"
+			},
 			"Client": {
 				"properties": {
 					"client_id": {
@@ -34,10 +199,6 @@
 			},
 			"Pick_Client.client_id-or-name-or-email-or-phone_number_": {
 				"properties": {
-					"client_id": {
-						"type": "number",
-						"format": "double"
-					},
 					"name": {
 						"type": "string"
 					},
@@ -46,13 +207,17 @@
 					},
 					"phone_number": {
 						"type": "string"
+					},
+					"client_id": {
+						"type": "number",
+						"format": "double"
 					}
 				},
 				"required": [
-					"client_id",
 					"name",
 					"email",
-					"phone_number"
+					"phone_number",
+					"client_id"
 				],
 				"type": "object",
 				"description": "From T, pick a set of properties whose keys are in the union K"
@@ -73,6 +238,132 @@
 		"contact": {}
 	},
 	"paths": {
+		"/seller": {
+			"get": {
+				"operationId": "GetAllSellers",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/Seller"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "CreateNewSeller",
+				"responses": {
+					"201": {
+						"description": "Created"
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/SellerCreationParams"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/product": {
+			"get": {
+				"operationId": "GetAllProducts",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/Product"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "CreateNewProduct",
+				"responses": {
+					"201": {
+						"description": "Created"
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/ProductCreationParams"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/locale": {
+			"get": {
+				"operationId": "GetAllLocales",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"items": {
+										"$ref": "#/components/schemas/Locale"
+									},
+									"type": "array"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": []
+			},
+			"post": {
+				"operationId": "CreateNewLocale",
+				"responses": {
+					"201": {
+						"description": "Created"
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/LocaleCreationParams"
+							}
+						}
+					}
+				}
+			}
+		},
 		"/client": {
 			"get": {
 				"operationId": "GetAllClients",

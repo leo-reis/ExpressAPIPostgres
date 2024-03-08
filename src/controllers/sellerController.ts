@@ -1,25 +1,40 @@
-import { Request, Response } from 'express';
-import { seller } from '../models/sellerModel';
+import {
+  Body,
+  Controller,
+  Get,
+  Path,
+  Post,
+  Query,
+  Route,
+  SuccessResponse,
+} from "tsoa";
+import { SellerService, SellerCreationParams } from '../services/sellerService';
+import { Seller } from '../models/sellerModel'
 
-const sellerModel = new seller;
-
-export class sellerController {
-  async getAllSellers(req: Request, res: Response) {
+@Route("seller")
+export class sellerController extends Controller {
+  @Get()
+  async getAllSellers(): Promise<Seller[]> {
     try {
-      const sellers = await sellerModel.getAllSellers();
-      res.status(200).json(sellers);
+      const sellersList = await new SellerService().getAllSellers();
+      return sellersList;
     } catch (error) {
-      res.status(500).json({ error: 'Error retrieving the list of sellers.' });
+      this.setStatus(500);
+      return [];
     }
   }
 
-  async createNewSeller (req: Request, res: Response) {
-    const { seller_id, name, email, phone_number } = req.body;
+  @SuccessResponse("201", "Created")
+  @Post()
+  async createNewSeller(
+    @Body() requestBody: SellerCreationParams
+  ): Promise<void> {
     try {
-      const newseller = await sellerModel.createNewSeller(seller_id, name, email, phone_number);
-      res.status(201).json({ message: 'Seller created successfully', seller: newseller });
+      const { seller_id, name, email, phone_number } =requestBody;
+      const newSeller = new SellerService().createNewSeller(seller_id, name, email, phone_number);
+      this.setStatus(201);
     } catch (error) {
-      res.status(500).json({ error: 'Error creating new seller.' });
+      this.setStatus(500);
     }
   }
-};
+}
