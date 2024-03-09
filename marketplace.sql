@@ -24,6 +24,11 @@ CREATE TABLE locale (
     name VARCHAR(100) NOT NULL
 );
 
+INSERT INTO locale (name) VALUES 
+('US English'),
+('French'),
+('Spanish');
+
 -- Create the product table
 CREATE TABLE product (
     product_id SERIAL PRIMARY KEY,
@@ -32,10 +37,6 @@ CREATE TABLE product (
     seller_id INT REFERENCES seller(seller_id) ON DELETE CASCADE,
     price NUMERIC(10, 2) NOT NULL,
     locale_id INT REFERENCES locale(locale_id) ON DELETE CASCADE
+    currency_code VARCHAR(3) NOT NULL
 );
 
--- Example data insertion for locale table
-INSERT INTO locale (name) VALUES 
-('US English'),
-('French'),
-('Spanish');

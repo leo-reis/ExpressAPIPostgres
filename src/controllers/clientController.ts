@@ -6,6 +6,8 @@ import {
   Post,
   Query,
   Route,
+  Response,
+  TsoaResponse,
   SuccessResponse,
 } from "tsoa";
 import { ClientService, ClientCreationParams } from '../services/clientService';
@@ -26,15 +28,20 @@ export class clientController extends Controller {
 
   @SuccessResponse("201", "Created")
   @Post()
+  @Response<500, { reason: string }>("500", "Internal Server Error")
   async createNewClient(
     @Body() requestBody: ClientCreationParams
-  ): Promise<void> {
+  ): Promise<string> {
     try {
-    const { client_id, name, email, phone_number } = requestBody;
-    const newClient = new ClientService().createNewClient(client_id, name, email, phone_number);
-    this.setStatus(201);
+      const { client_id, name, email, phone_number } = requestBody;
+      await new ClientService().createNewClient(client_id, name, email, phone_number);
+      this.setStatus(201);
+      return "Data on Client entity created successfully"
     } catch (error) {
       this.setStatus(500);
+      const errorMessage = "Unknown error occurred, please check your database connection or API build";
+      return errorMessage;
     }
   }
 }
+

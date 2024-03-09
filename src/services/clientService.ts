@@ -9,7 +9,7 @@ export class ClientService {
       const query = 'SELECT * FROM client';
       const result = await db_pool.query(query);
       const clients: Client[] = result.rows.map((row: any) => {
-        return {
+      return {
           client_id: row.client_id,
           name: row.name,
           email: row.email,

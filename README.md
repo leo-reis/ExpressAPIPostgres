@@ -26,14 +26,9 @@ If you just wish to run this API to make some tests, you can follow these steps:
 ```bash
 npm install
 ```
-2. Build the js files of the project with tsc command:
+2. Build the js files of the project and run the API:
 ```bash
-npx tsc
-```
-
-3. Run the generated JavaScript project:
-```bash
-node dist/src/index.js
+npm run build-and-start
 ```
 
 ## Test of Post method
