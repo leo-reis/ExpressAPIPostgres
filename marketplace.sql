@@ -7,7 +7,7 @@ CREATE TABLE seller (
     seller_id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
-    phone_number VARCHAR(20) NOT NULL
+    phone_number VARCHAR(20)
 );
 
 -- Create the client table
@@ -15,7 +15,7 @@ CREATE TABLE client (
     client_id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
-    phone_number VARCHAR(20) NOT NULL
+    phone_number VARCHAR(20)
 );
 
 -- Create the locale table

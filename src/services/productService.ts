@@ -1,7 +1,7 @@
 import { db_pool } from "../config/databaseConnection";
 import { Product } from "../models/productModel"
 
-export type ProductCreationParams = Pick<Product, "product_id" | "name" | "description" | "seller_id" | "price" | "locale_id">;
+export type ProductCreationParams = Pick<Product, "name" | "description" | "seller_id" | "price" | "locale_id">;
 
 export class ProductService { 
   async getAllProducts() {
@@ -25,15 +25,14 @@ export class ProductService {
   }
 
   async createNewProduct (
-    product_id: number, 
     name: string, 
     description: string, 
     seller_id: number,
     price: number,
     locale_id: number) {
     try {
-      const query = 'INSERT INTO product (product_id, name, description, seller_id, price, locale_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *';
-      const values = [product_id, name, description, seller_id, price, locale_id];
+      const query = 'INSERT INTO product (name, description, seller_id, price, locale_id) VALUES ($1, $2, $3, $4, $5) RETURNING *';
+      const values = [name, description, seller_id, price, locale_id];
       const result = await db_pool.query(query, values);
       return result.rows[0];
     } catch (error) {

@@ -4,6 +4,8 @@
   "description": "Simple MarketPlace API using Express and PostgreSQL",
   "main": "./src/index.js",
   "scripts": {
+    "ts-node-build-and-debug": "tsoa routes && tsoa spec && tsc && ts-node ./src/index.ts",
+    "tsoa-prep": "tsoa routes && tsoa spec",
     "ts-node-dev": "ts-node ./src/index.ts",
     "build": "tsc",
     "start": "node dist/src/index.js",

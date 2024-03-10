@@ -9,10 +9,6 @@
 		"schemas": {
 			"Seller": {
 				"properties": {
-					"seller_id": {
-						"type": "number",
-						"format": "double"
-					},
 					"name": {
 						"type": "string"
 					},
@@ -24,7 +20,6 @@
 					}
 				},
 				"required": [
-					"seller_id",
 					"name",
 					"email",
 					"phone_number"
@@ -32,12 +27,8 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"Pick_Seller.seller_id-or-name-or-email-or-phone_number_": {
+			"Pick_Seller.name-or-email-or-phone_number_": {
 				"properties": {
-					"seller_id": {
-						"type": "number",
-						"format": "double"
-					},
 					"name": {
 						"type": "string"
 					},
@@ -49,7 +40,6 @@
 					}
 				},
 				"required": [
-					"seller_id",
 					"name",
 					"email",
 					"phone_number"
@@ -58,14 +48,10 @@
 				"description": "From T, pick a set of properties whose keys are in the union K"
 			},
 			"SellerCreationParams": {
-				"$ref": "#/components/schemas/Pick_Seller.seller_id-or-name-or-email-or-phone_number_"
+				"$ref": "#/components/schemas/Pick_Seller.name-or-email-or-phone_number_"
 			},
 			"Product": {
 				"properties": {
-					"product_id": {
-						"type": "number",
-						"format": "double"
-					},
 					"name": {
 						"type": "string"
 					},
@@ -86,7 +72,6 @@
 					}
 				},
 				"required": [
-					"product_id",
 					"name",
 					"description",
 					"seller_id",
@@ -96,21 +81,17 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"Pick_Product.product_id-or-name-or-description-or-seller_id-or-price-or-locale_id_": {
+			"Pick_Product.name-or-description-or-seller_id-or-price-or-locale_id_": {
 				"properties": {
-					"seller_id": {
-						"type": "number",
-						"format": "double"
-					},
 					"name": {
 						"type": "string"
 					},
-					"product_id": {
-						"type": "number",
-						"format": "double"
-					},
 					"description": {
 						"type": "string"
+					},
+					"seller_id": {
+						"type": "number",
+						"format": "double"
 					},
 					"price": {
 						"type": "number",
@@ -122,10 +103,9 @@
 					}
 				},
 				"required": [
-					"seller_id",
 					"name",
-					"product_id",
 					"description",
+					"seller_id",
 					"price",
 					"locale_id"
 				],
@@ -133,51 +113,37 @@
 				"description": "From T, pick a set of properties whose keys are in the union K"
 			},
 			"ProductCreationParams": {
-				"$ref": "#/components/schemas/Pick_Product.product_id-or-name-or-description-or-seller_id-or-price-or-locale_id_"
+				"$ref": "#/components/schemas/Pick_Product.name-or-description-or-seller_id-or-price-or-locale_id_"
 			},
 			"Locale": {
 				"properties": {
-					"locale_id": {
-						"type": "number",
-						"format": "double"
-					},
 					"name": {
 						"type": "string"
 					}
 				},
 				"required": [
-					"locale_id",
 					"name"
 				],
 				"type": "object",
 				"additionalProperties": false
 			},
-			"Pick_Locale.locale_id-or-name_": {
+			"Pick_Locale.name_": {
 				"properties": {
 					"name": {
 						"type": "string"
-					},
-					"locale_id": {
-						"type": "number",
-						"format": "double"
 					}
 				},
 				"required": [
-					"name",
-					"locale_id"
+					"name"
 				],
 				"type": "object",
 				"description": "From T, pick a set of properties whose keys are in the union K"
 			},
 			"LocaleCreationParams": {
-				"$ref": "#/components/schemas/Pick_Locale.locale_id-or-name_"
+				"$ref": "#/components/schemas/Pick_Locale.name_"
 			},
 			"Client": {
 				"properties": {
-					"client_id": {
-						"type": "number",
-						"format": "double"
-					},
 					"name": {
 						"type": "string"
 					},
@@ -189,7 +155,6 @@
 					}
 				},
 				"required": [
-					"client_id",
 					"name",
 					"email",
 					"phone_number"
@@ -197,7 +162,7 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"Pick_Client.client_id-or-name-or-email-or-phone_number_": {
+			"Pick_Client.name-or-email-or-phone_number_": {
 				"properties": {
 					"name": {
 						"type": "string"
@@ -207,23 +172,18 @@
 					},
 					"phone_number": {
 						"type": "string"
-					},
-					"client_id": {
-						"type": "number",
-						"format": "double"
 					}
 				},
 				"required": [
 					"name",
 					"email",
-					"phone_number",
-					"client_id"
+					"phone_number"
 				],
 				"type": "object",
 				"description": "From T, pick a set of properties whose keys are in the union K"
 			},
 			"ClientCreationParams": {
-				"$ref": "#/components/schemas/Pick_Client.client_id-or-name-or-email-or-phone_number_"
+				"$ref": "#/components/schemas/Pick_Client.name-or-email-or-phone_number_"
 			}
 		},
 		"securitySchemes": {}
@@ -263,7 +223,36 @@
 				"operationId": "CreateNewSeller",
 				"responses": {
 					"201": {
-						"description": "Created"
+						"description": "Created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "number",
+									"enum": [
+										500
+									],
+									"nullable": false
+								}
+							}
+						},
+						"headers": {
+							"reason": {
+								"schema": {
+									"type": "string"
+								},
+								"required": true
+							}
+						}
 					}
 				},
 				"security": [],
@@ -305,7 +294,36 @@
 				"operationId": "CreateNewProduct",
 				"responses": {
 					"201": {
-						"description": "Created"
+						"description": "Created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "number",
+									"enum": [
+										500
+									],
+									"nullable": false
+								}
+							}
+						},
+						"headers": {
+							"reason": {
+								"schema": {
+									"type": "string"
+								},
+								"required": true
+							}
+						}
 					}
 				},
 				"security": [],
@@ -347,7 +365,36 @@
 				"operationId": "CreateNewLocale",
 				"responses": {
 					"201": {
-						"description": "Created"
+						"description": "Created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "number",
+									"enum": [
+										500
+									],
+									"nullable": false
+								}
+							}
+						},
+						"headers": {
+							"reason": {
+								"schema": {
+									"type": "string"
+								},
+								"required": true
+							}
+						}
 					}
 				},
 				"security": [],
@@ -389,7 +436,36 @@
 				"operationId": "CreateNewClient",
 				"responses": {
 					"201": {
-						"description": "Created"
+						"description": "Created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"500": {
+						"description": "Internal Server Error",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "number",
+									"enum": [
+										500
+									],
+									"nullable": false
+								}
+							}
+						},
+						"headers": {
+							"reason": {
+								"schema": {
+									"type": "string"
+								},
+								"required": true
+							}
+						}
 					}
 				},
 				"security": [],

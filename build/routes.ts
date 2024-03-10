@@ -18,7 +18,6 @@ const models: TsoaRoute.Models = {
     "Seller": {
         "dataType": "refObject",
         "properties": {
-            "seller_id": {"dataType":"double","required":true},
             "name": {"dataType":"string","required":true},
             "email": {"dataType":"string","required":true},
             "phone_number": {"dataType":"string","required":true},
@@ -26,20 +25,19 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "Pick_Seller.seller_id-or-name-or-email-or-phone_number_": {
+    "Pick_Seller.name-or-email-or-phone_number_": {
         "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"seller_id":{"dataType":"double","required":true},"name":{"dataType":"string","required":true},"email":{"dataType":"string","required":true},"phone_number":{"dataType":"string","required":true}},"validators":{}},
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string","required":true},"email":{"dataType":"string","required":true},"phone_number":{"dataType":"string","required":true}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "SellerCreationParams": {
         "dataType": "refAlias",
-        "type": {"ref":"Pick_Seller.seller_id-or-name-or-email-or-phone_number_","validators":{}},
+        "type": {"ref":"Pick_Seller.name-or-email-or-phone_number_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "Product": {
         "dataType": "refObject",
         "properties": {
-            "product_id": {"dataType":"double","required":true},
             "name": {"dataType":"string","required":true},
             "description": {"dataType":"string","required":true},
             "seller_id": {"dataType":"double","required":true},
@@ -49,39 +47,37 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "Pick_Product.product_id-or-name-or-description-or-seller_id-or-price-or-locale_id_": {
+    "Pick_Product.name-or-description-or-seller_id-or-price-or-locale_id_": {
         "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"seller_id":{"dataType":"double","required":true},"name":{"dataType":"string","required":true},"product_id":{"dataType":"double","required":true},"description":{"dataType":"string","required":true},"price":{"dataType":"double","required":true},"locale_id":{"dataType":"double","required":true}},"validators":{}},
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string","required":true},"description":{"dataType":"string","required":true},"seller_id":{"dataType":"double","required":true},"price":{"dataType":"double","required":true},"locale_id":{"dataType":"double","required":true}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "ProductCreationParams": {
         "dataType": "refAlias",
-        "type": {"ref":"Pick_Product.product_id-or-name-or-description-or-seller_id-or-price-or-locale_id_","validators":{}},
+        "type": {"ref":"Pick_Product.name-or-description-or-seller_id-or-price-or-locale_id_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "Locale": {
         "dataType": "refObject",
         "properties": {
-            "locale_id": {"dataType":"double","required":true},
             "name": {"dataType":"string","required":true},
         },
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "Pick_Locale.locale_id-or-name_": {
+    "Pick_Locale.name_": {
         "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string","required":true},"locale_id":{"dataType":"double","required":true}},"validators":{}},
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string","required":true}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "LocaleCreationParams": {
         "dataType": "refAlias",
-        "type": {"ref":"Pick_Locale.locale_id-or-name_","validators":{}},
+        "type": {"ref":"Pick_Locale.name_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "Client": {
         "dataType": "refObject",
         "properties": {
-            "client_id": {"dataType":"double","required":true},
             "name": {"dataType":"string","required":true},
             "email": {"dataType":"string","required":true},
             "phone_number": {"dataType":"string","required":true},
@@ -89,14 +85,14 @@ const models: TsoaRoute.Models = {
         "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "Pick_Client.client_id-or-name-or-email-or-phone_number_": {
+    "Pick_Client.name-or-email-or-phone_number_": {
         "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string","required":true},"email":{"dataType":"string","required":true},"phone_number":{"dataType":"string","required":true},"client_id":{"dataType":"double","required":true}},"validators":{}},
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"name":{"dataType":"string","required":true},"email":{"dataType":"string","required":true},"phone_number":{"dataType":"string","required":true}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "ClientCreationParams": {
         "dataType": "refAlias",
-        "type": {"ref":"Pick_Client.client_id-or-name-or-email-or-phone_number_","validators":{}},
+        "type": {"ref":"Pick_Client.name-or-email-or-phone_number_","validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 };

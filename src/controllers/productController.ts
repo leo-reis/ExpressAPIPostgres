@@ -6,6 +6,7 @@ import {
   Post,
   Query,
   Route,
+  Response,
   SuccessResponse,
 } from "tsoa";
 import { ProductService, ProductCreationParams } from '../services/productService';
@@ -26,15 +27,18 @@ export class productController extends Controller {
 
   @SuccessResponse("201", "Created")
   @Post()
+  @Response<500, { reason: string }>("500", "Internal Server Error")
   async createNewProduct(
     @Body() requestBody: ProductCreationParams
-  ): Promise<void> {
+  ): Promise<string> {
     try {
-      const { product_id, name, description, seller_id, price, locale_id } =requestBody;
-      const newProduct = new ProductService().createNewProduct(product_id, name, description, seller_id, price, locale_id);
+      const { name, description, seller_id, price, locale_id } = requestBody;
+      await new ProductService().createNewProduct(name, description, seller_id, price, locale_id);
       this.setStatus(201);
+      return "Data on Product entity created successfully"
     } catch (error) {
       this.setStatus(500);
+      return "Unknown error occurred, please check your database connection or API build";
     }
   }
 }

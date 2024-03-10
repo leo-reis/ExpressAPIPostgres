@@ -79,8 +79,7 @@ If you wish to regenerate the OAS and the routes.ts file, first you must have ts
 ```bash
 npm install -g tsoa
 ```
-Then, to generate the tsoa routes and the openapi spec on the build directory, respectively, run:
+Then, to generate both the tsoa routes and the openapi spec on the build directory you can run:
 ```bash
-tsoa routes
-tsoa spec
+npm run tsoa-prep
 ```

@@ -1,7 +1,7 @@
 import { db_pool } from "../config/databaseConnection";
 import { Locale } from "../models/localeModel"
 
-export type LocaleCreationParams = Pick<Locale, "locale_id" | "name">;
+export type LocaleCreationParams = Pick<Locale, "name">;
 
 export class LocaleService { 
   async getAllLocales() {
@@ -21,11 +21,10 @@ export class LocaleService {
   }
 
   async createNewLocale (
-    locale_id: number, 
     name: string) {
     try {
-      const query = 'INSERT INTO locale (locale_id, name) VALUES ($1, $2) RETURNING *';
-      const values = [locale_id, name];
+      const query = 'INSERT INTO locale (name) VALUES ($1) RETURNING *';
+      const values = [name];
       const result = await db_pool.query(query, values);
       return result.rows[0];
     } catch (error) {

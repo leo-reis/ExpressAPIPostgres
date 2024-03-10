@@ -6,6 +6,7 @@ import {
   Post,
   Query,
   Route,
+  Response,
   SuccessResponse,
 } from "tsoa";
 import { SellerService, SellerCreationParams } from '../services/sellerService';
@@ -26,15 +27,18 @@ export class sellerController extends Controller {
 
   @SuccessResponse("201", "Created")
   @Post()
+  @Response<500, { reason: string }>("500", "Internal Server Error")
   async createNewSeller(
     @Body() requestBody: SellerCreationParams
-  ): Promise<void> {
+  ): Promise<string> {
     try {
-      const { seller_id, name, email, phone_number } =requestBody;
-      const newSeller = new SellerService().createNewSeller(seller_id, name, email, phone_number);
+      const { name, email, phone_number } = requestBody;
+      await new SellerService().createNewSeller(name, email, phone_number);
       this.setStatus(201);
+      return "Data on Seller entity created successfully"
     } catch (error) {
       this.setStatus(500);
+      return "Unknown error occurred, please check your database connection or API build";
     }
   }
 }

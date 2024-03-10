@@ -6,6 +6,7 @@ import {
   Post,
   Query,
   Route,
+  Response,
   SuccessResponse,
 } from "tsoa";
 import { LocaleService, LocaleCreationParams } from '../services/localeService';
@@ -26,15 +27,18 @@ export class localeController extends Controller {
 
   @SuccessResponse("201", "Created")
   @Post()
+  @Response<500, { reason: string }>("500", "Internal Server Error")
   async createNewLocale(
     @Body() requestBody: LocaleCreationParams
-  ): Promise<void> {
+  ): Promise<string> {
     try {
-      const { locale_id, name } =requestBody;
-      const newLocale = new LocaleService().createNewLocale(locale_id, name);
+      const { name } = requestBody;
+      await new LocaleService().createNewLocale(name);
       this.setStatus(201);
+      return "Data on Locale entity created successfully"
     } catch (error) {
       this.setStatus(500);
+      return "Unknown error occurred, please check your database connection or API build";
     }
   }
 }
