@@ -9,16 +9,16 @@ import {
   Response,
   SuccessResponse,
 } from "tsoa";
-import { ClientService, ClientCreationParams } from '../services/clientService';
-import { Client } from '../models/clientModel'
+import { SellerService, SellerCreationParams } from '../services/seller-service';
+import { Seller } from '../models/seller-model'
 
-@Route("client")
-export class clientController extends Controller {
+@Route("seller")
+export class sellerController extends Controller {
   @Get()
-  async getAllClients(): Promise<Client[]> {
+  async getAllSellers(): Promise<Seller[]> {
     try {
-      const clientsList = await new ClientService().getAllClients();
-      return clientsList;
+      const sellersList = await new SellerService().getAllSellers();
+      return sellersList;
     } catch (error) {
       this.setStatus(500);
       return [];
@@ -28,18 +28,17 @@ export class clientController extends Controller {
   @SuccessResponse("201", "Created")
   @Post()
   @Response<500, { reason: string }>("500", "Internal Server Error")
-  async createNewClient(
-    @Body() requestBody: ClientCreationParams
+  async createNewSeller(
+    @Body() requestBody: SellerCreationParams
   ): Promise<string> {
     try {
       const { name, email, phone_number } = requestBody;
-      await new ClientService().createNewClient(name, email, phone_number || null);
+      await new SellerService().createNewSeller(name, email, phone_number || null);
       this.setStatus(201);
-      return "Data on Client entity created successfully"
+      return "Data on Seller entity created successfully"
     } catch (error) {
       this.setStatus(500);
       return "Unknown error occurred, please check your database connection or API build";
     }
   }
 }
-

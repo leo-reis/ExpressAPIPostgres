@@ -1,5 +1,5 @@
-import { db_pool } from "../config/databaseConnection";
-import { Client } from "../models/clientModel"
+import { db_pool } from "../config/database-connection";
+import { Client } from "../models/client-model"
 
 export type ClientCreationParams = Pick<Client, "name" | "email" | "phone_number">;
 

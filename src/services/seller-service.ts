@@ -1,5 +1,5 @@
-import { db_pool } from "../config/databaseConnection";
-import { Seller } from "../models/sellerModel"
+import { db_pool } from "../config/database-connection";
+import { Seller } from "../models/seller-model"
 
 export type SellerCreationParams = Pick<Seller, "name" | "email" | "phone_number">;
 

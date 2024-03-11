@@ -1,5 +1,5 @@
-import { db_pool } from "../config/databaseConnection";
-import { Locale } from "../models/localeModel"
+import { db_pool } from "../config/database-connection";
+import { Locale } from "../models/locale-model"
 
 export type LocaleCreationParams = Pick<Locale, "name">;
 

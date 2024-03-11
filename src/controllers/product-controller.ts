@@ -9,8 +9,8 @@ import {
   Response,
   SuccessResponse,
 } from "tsoa";
-import { ProductService, ProductCreationParams } from '../services/productService';
-import { Product } from '../models/productModel'
+import { ProductService, ProductCreationParams } from '../services/product-service';
+import { Product } from '../models/product-model'
 
 @Route("product")
 export class productController extends Controller {

@@ -1,5 +1,5 @@
-import { db_pool } from "../config/databaseConnection";
-import { Product } from "../models/productModel"
+import { db_pool } from "../config/database-connection";
+import { Product } from "../models/product-model"
 
 export type ProductCreationParams = Pick<Product, "name" | "description" | "seller_id" | "price" | "locale_id">;
 

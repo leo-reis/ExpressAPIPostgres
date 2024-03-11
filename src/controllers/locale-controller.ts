@@ -9,8 +9,8 @@ import {
   Response,
   SuccessResponse,
 } from "tsoa";
-import { LocaleService, LocaleCreationParams } from '../services/localeService';
-import { Locale } from '../models/localeModel'
+import { LocaleService, LocaleCreationParams } from '../services/locale-service';
+import { Locale } from '../models/locale-model'
 
 @Route("locale")
 export class localeController extends Controller {
