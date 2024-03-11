@@ -9,6 +9,10 @@
 		"schemas": {
 			"Seller": {
 				"properties": {
+					"seller_id": {
+						"type": "number",
+						"format": "double"
+					},
 					"name": {
 						"type": "string"
 					},
@@ -16,13 +20,14 @@
 						"type": "string"
 					},
 					"phone_number": {
-						"type": "string"
+						"type": "string",
+						"nullable": true
 					}
 				},
 				"required": [
+					"seller_id",
 					"name",
-					"email",
-					"phone_number"
+					"email"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -41,8 +46,7 @@
 				},
 				"required": [
 					"name",
-					"email",
-					"phone_number"
+					"email"
 				],
 				"type": "object",
 				"description": "From T, pick a set of properties whose keys are in the union K"
@@ -144,6 +148,10 @@
 			},
 			"Client": {
 				"properties": {
+					"client_id": {
+						"type": "number",
+						"format": "double"
+					},
 					"name": {
 						"type": "string"
 					},
@@ -151,13 +159,14 @@
 						"type": "string"
 					},
 					"phone_number": {
-						"type": "string"
+						"type": "string",
+						"nullable": true
 					}
 				},
 				"required": [
+					"client_id",
 					"name",
-					"email",
-					"phone_number"
+					"email"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -176,8 +185,7 @@
 				},
 				"required": [
 					"name",
-					"email",
-					"phone_number"
+					"email"
 				],
 				"type": "object",
 				"description": "From T, pick a set of properties whose keys are in the union K"

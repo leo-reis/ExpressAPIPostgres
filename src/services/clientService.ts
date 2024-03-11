@@ -25,7 +25,7 @@ export class ClientService {
   async createNewClient (
     name: string, 
     email: string, 
-    phone_number: string) {
+    phone_number: string | null) {
     try {
       const query = 'INSERT INTO client (name, email, phone_number) VALUES ($1, $2, $3) RETURNING *';
       const values = [name, email, phone_number];

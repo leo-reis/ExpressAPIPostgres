@@ -33,7 +33,7 @@ export class sellerController extends Controller {
   ): Promise<string> {
     try {
       const { name, email, phone_number } = requestBody;
-      await new SellerService().createNewSeller(name, email, phone_number);
+      await new SellerService().createNewSeller(name, email, phone_number || null);
       this.setStatus(201);
       return "Data on Seller entity created successfully"
     } catch (error) {
